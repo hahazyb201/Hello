@@ -159,6 +159,11 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    
+    if r.Method == "OPTIONS" {
+		return
+	}
+
 	user := r.Context().Value("user")
 	claims := user.(*jwt.Token).Claims
 	username := claims.(jwt.MapClaims)["username"]
